@@ -83,7 +83,7 @@ const Home = () => {
           )}
 
           {!isLoggedIn ? (
-            <li><Link to="/login">Login</Link></li>
+            <Link to="/login">Login</Link> 
           ) : (
             <Link onClick={handleLogout}>Logout</Link>
           )}
