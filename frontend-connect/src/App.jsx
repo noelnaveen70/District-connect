@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import axios from "axios";
 
 import Home from "./components/Home";
@@ -19,6 +19,21 @@ import Updateschool from "./components/Updateschool";
 import Createschool from "./components/Createschool";
 import Viewschool from "./components/Viewschool";
 
+import Alappuzha from "./components/AllDistricts/Alappuzha";
+import Ernakulam from "./components/AllDistricts/Ernakulam";
+import Idukki from "./components/AllDistricts/Idukki";
+import Kannur from "./components/AllDistricts/Kannur";
+import Kasaragod from "./components/AllDistricts/Kasaragod";
+import Kottayam from "./components/AllDistricts/Kottayam";
+import Kollam from "./components/AllDistricts/Kollam";
+import Kozhikode from "./components/AllDistricts/Kozhikode";
+import Malappuram from "./components/AllDistricts/Malappuram";
+import Palakkad from "./components/AllDistricts/Palakkad";
+import Pathanamthitta from "./components/AllDistricts/Pathanamthitta";
+import Thiruvananthapuram from "./components/AllDistricts/Thiruvananthapuram";
+import Thrissur from "./components/AllDistricts/Thrissur";
+import Wayanad from "./components/AllDistricts/Wayanad";
+
 import JobVacancy from "./components/JobVacancy";
 import Tourism from "./components/Tourism";
 import Hospital from "./components/Hospital";
@@ -29,7 +44,7 @@ import { AuthProvider } from "./components/AuthContext";
 
 const PrivateRoute = ({ children, roles }) => {
   const [user, setUser] = useState(null);
-  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios
@@ -37,48 +52,109 @@ const PrivateRoute = ({ children, roles }) => {
       .then((response) => {
         if (response.data.loggedIn) {
           setUser(response.data.user);
-        } else {
-          setUser(null);
-          navigate("/login");
         }
+        setLoading(false);
       })
       .catch(() => {
         setUser(null);
-        navigate("/login");
+        setLoading(false);
       });
-  }, [navigate]);
+  }, []);
 
-  return user && roles.includes(user.role) ? children : <Navigate to="/home" />;
+  if (loading) return <div>Loading...</div>; //  Prevents early redirects
+  return user && roles.includes(user.role) ? children : <Navigate to="/login" />;
 };
 
 function App() {
   return (
     <AuthProvider>
-      <Routes>
-        <Route path="/" element={<Navigate to="/home" />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/districts" element={<Districts />} />
-        <Route path="/adminpanel" element={<PrivateRoute roles={['admin']}><Adminpanel /></PrivateRoute>} />
-        <Route path="/createjob" element={<PrivateRoute roles={['admin']}><Createjob /></PrivateRoute>} />
-        <Route path="/viewjob" element={<Viewjob />} />
-        <Route path="/createtourism" element={<PrivateRoute roles={['admin']}><Createtourism /></PrivateRoute>} />
-        <Route path="/viewtourism" element={<Viewtourism />} />
-        <Route path="/edit-job/:id" element={<PrivateRoute roles={['admin']}><Updatejob /></PrivateRoute>} />
-        <Route path="/edit-tourism/:id" element={<PrivateRoute roles={['admin']}><Updatetourism /></PrivateRoute>} />
-        <Route path="/createhospital" element={<PrivateRoute roles={['admin']}><Createhospital /></PrivateRoute>} />
-        <Route path="/viewhospital" element={<Viewhospital />} />
-        <Route path="/edit-hospital/:id" element={<PrivateRoute roles={['admin']}><Updatehospital /></PrivateRoute>} />
-        <Route path="/edit-school/:id" element={<PrivateRoute roles={['admin']}><Updateschool /></PrivateRoute>} />
-        <Route path="/createschool" element={<PrivateRoute roles={['admin']}><Createschool /></PrivateRoute>} />
-        <Route path="/viewschool" element={<Viewschool />} />
-        <Route path="/job-vacancy" element={<JobVacancy />} />
-        <Route path="/tourism" element={<Tourism />} />
-        <Route path="/hospital" element={<Hospital />} />
-        <Route path="/school" element={<School />} />
-        <Route path="/jobapply" element={<Jobapply />} />
-        <Route path="/jobapplications" element={<PrivateRoute roles={['admin']}><JobApplications /></PrivateRoute>} />
-      </Routes>
+      <Router>
+        <Routes>
+          {/* Default Route Redirect */}
+          <Route path="/" element={<Navigate to="/home" />} />
+
+          {/* Public Routes */}
+          <Route path="/home" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/districts" element={<Districts />} />
+          <Route path="/job-vacancy" element={<JobVacancy />} />
+          <Route path="/tourism" element={<Tourism />} />
+          <Route path="/hospital" element={<Hospital />} />
+          <Route path="/school" element={<School />} />
+          
+          {/* District-Specific Pages */}
+          <Route path="/district/alappuzha" element={<Alappuzha />} />
+          <Route path="/district/ernakulam" element={<Ernakulam />} />
+          <Route path="/district/idukki" element={<Idukki />} />
+          <Route path="/district/kannur" element={<Kannur />} />
+          <Route path="/district/kasaragod" element={<Kasaragod />} />
+          <Route path="/district/kottayam" element={<Kottayam />} />
+          <Route path="/district/kollam" element={<Kollam />} />
+          <Route path="/district/kozhikode" element={<Kozhikode />} />
+          <Route path="/district/malappuram" element={<Malappuram />} />
+          <Route path="/district/palakkad" element={<Palakkad />} />
+          <Route path="/district/pathanamthitta" element={<Pathanamthitta />} />
+          <Route path="/district/thiruvananthapuram" element={<Thiruvananthapuram />} />
+          <Route path="/district/thrissur" element={<Thrissur />} />
+          <Route path="/district/wayanad" element={<Wayanad />} />
+
+          {/* Private Routes (Require Authentication) */}
+          <Route
+            path="/adminpanel"
+            element={
+              <PrivateRoute roles={["admin"]}>
+                <Adminpanel />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/create-job"
+            element={
+              <PrivateRoute roles={["admin"]}>
+                <Createjob />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/view-job"
+            element={
+              <PrivateRoute roles={["admin", "user"]}>
+                <Viewjob />
+              </PrivateRoute>
+            }
+          />
+          <Route path="/edit-job/:id" element={<Updatejob />} />
+
+          <Route path="/create-tourism" element={<Createtourism />} />
+          <Route path="/view-tourism" element={<Viewtourism />} />
+          <Route path="/edit-tourism/:id" element={<Updatetourism />} />
+
+          <Route path="/create-hospital" element={<Createhospital />} />
+          <Route path="/view-hospital" element={<Viewhospital />} />
+          <Route path="/edit-hospital/:id" element={<Updatehospital />} />
+
+          <Route path="/create-school" element={<Createschool />} />
+          <Route path="/view-school" element={<Viewschool />} />
+          <Route path="/edit-school/:id" element={<Updateschool />} />
+
+          <Route
+            path="/jobapply"
+            element={
+              <PrivateRoute roles={["user"]}>
+                <Jobapply />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/jobapplications"
+            element={
+              <PrivateRoute roles={["admin"]}>
+                <JobApplications />
+              </PrivateRoute>
+            }
+          />
+        </Routes>
+      </Router>
     </AuthProvider>
   );
 }
