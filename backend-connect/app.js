@@ -36,7 +36,7 @@ cloudinary.config({
 app.use(
   cors({
     credentials: true,
-    origin: ["https://district-connect-backend.onrender.com", "https://district-connect-backend.onrender.com"],
+    origin: ["https://district-connect-frontend.onrender.com"], //  Change to your frontend URL
   })
 );
 
