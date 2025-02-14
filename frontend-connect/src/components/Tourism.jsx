@@ -8,7 +8,7 @@ const Tourism = () => {
   const [tourismSpots, setTourismSpots] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/tourism/displaytourism")
+    fetch("https://district-connect-backend.onrender.com/tourism/displaytourism")
       .then((res) => res.json())
       .then((data) => {
         const filteredSpots = district

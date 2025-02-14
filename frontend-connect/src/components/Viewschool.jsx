@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Box, Typography, Card, CardContent, Button, Grid, Link } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -7,7 +8,7 @@ const ViewSchoolPage = () => {
   const [schools, setSchools] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/school/displayschools")
+    fetch("https://district-connect-backend.onrender.com/school/displayschools")
       .then((res) => {
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);
@@ -22,7 +23,7 @@ const ViewSchoolPage = () => {
     if (!window.confirm("Are you sure you want to delete this school entry?")) return;
 
     try {
-      const response = await fetch(`http://localhost:5000/school/deleteschool/${id}`, {
+      const response = await fetch(`https://district-connect-backend.onrender.com/school/deleteschool/${id}`, {
         method: "DELETE",
       });
 

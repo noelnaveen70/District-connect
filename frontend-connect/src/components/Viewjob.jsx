@@ -7,7 +7,7 @@ const ViewJobsPage = () => {
   const [jobVacancies, setJobVacancies] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/job/displayjobs")
+    fetch("https://district-connect-backend.onrender.com/job/displayjobs")
       .then((res) => {
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);
@@ -22,7 +22,7 @@ const ViewJobsPage = () => {
     if (!window.confirm("Are you sure you want to delete this job vacancy?")) return;
 
     try {
-      const response = await fetch(`http://localhost:5000/job/deletejob/${id}`, {
+      const response = await fetch(`https://district-connect-backend.onrender.com/job/deletejob/${id}`, {
         method: "DELETE",
       });
 

@@ -33,7 +33,7 @@ const Login = () => {
     try {
       if (isLogin) {
         // **LOGIN LOGIC**
-        const response = await axios.post('http://localhost:5000/log/login', { email, password });
+        const response = await axios.post('https://district-connect-backend.onrender.com/log/login', { email, password });
 
         if (response.data.token) {
           localStorage.setItem('authToken', response.data.token);
@@ -49,7 +49,7 @@ const Login = () => {
         // **REGISTRATION LOGIC**
         const user = { username, email, password,};
 
-        const response = await axios.post('http://localhost:5000/log/register', user);
+        const response = await axios.post('https://district-connect-backend.onrender.com/log/register', user);
 
         if (response.data.message === 'User registered successfully!') {
           setUsername('');

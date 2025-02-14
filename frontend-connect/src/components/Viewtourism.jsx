@@ -7,7 +7,7 @@ const ViewTourismPage = () => {
   const [tourismSpots, setTourismSpots] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/tourism/displaytourism")
+    fetch("https://district-connect-backend.onrender.com/tourism/displaytourism")
       .then((res) => {
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);
@@ -22,7 +22,7 @@ const ViewTourismPage = () => {
     if (!window.confirm("Are you sure you want to delete this tourism entry?")) return;
 
     try {
-      const response = await fetch(`http://localhost:5000/tourism/deletetourism/${id}`, {
+      const response = await fetch(`https://district-connect-backend.onrender.com/tourism/deletetourism/${id}`, {
         method: "DELETE",
       });
 

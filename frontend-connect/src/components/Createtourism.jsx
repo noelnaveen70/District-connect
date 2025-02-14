@@ -24,7 +24,7 @@ const CreateTourism = () => {
     };
   
     try {
-      const response = await fetch("http://localhost:5000/tourism/createtourism", {
+      const response = await fetch("https://district-connect-backend.onrender.com/tourism/createtourism", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(tourismData),

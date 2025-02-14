@@ -13,7 +13,7 @@ const JobApplications = () => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/jobapply/applications")
+    axios.get("https://district-connect-backend.onrender.com/jobapply/applications")
       .then((response) => {
         setApplications(response.data);
         setLoading(false);
@@ -26,7 +26,7 @@ const JobApplications = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/jobapply/applications/${id}`);
+      await axios.delete(`https://district-connect-backend.onrender.com/jobapply/applications/${id}`);
       setApplications((prev) => prev.filter((app) => app._id !== id));
 
       // Show success notification

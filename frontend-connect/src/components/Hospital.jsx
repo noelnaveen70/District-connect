@@ -8,7 +8,7 @@ const Hospital = () => {
   const [hospitals, setHospitals] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/hospital/displayhospitals")
+    fetch("https://district-connect-backend.onrender.com/hospital/displayhospitals")
       .then((res) => res.json())
       .then((data) => {
         const filteredHospitals = district

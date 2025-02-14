@@ -59,7 +59,7 @@ const JobApplicationForm = () => {
       formData.append("resume", image);
 
       const response = await axios.post(
-        "http://localhost:5000/jobapply/job-apply",
+        "https://district-connect-backend.onrender.com/jobapply/job-apply",
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );

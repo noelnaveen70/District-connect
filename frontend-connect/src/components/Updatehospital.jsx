@@ -26,7 +26,7 @@ const EditHospital = () => {
   useEffect(() => {
     const fetchHospitalDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/hospital/details/${id}`);
+        const response = await fetch(`https://district-connect-backend.onrender.com/hospital/details/${id}`);
 
         if (!response.ok) {
           throw new Error(`Error: ${response.status} ${response.statusText}`);
@@ -52,7 +52,7 @@ const EditHospital = () => {
     const updatedHospital = { name, district, locationUrl, embedUrl, description };  // ✅ Include description
 
     try {
-      const response = await fetch(`http://localhost:5000/hospital/updatehospital/${id}`, {
+      const response = await fetch(`https://district-connect-backend.onrender.com/hospital/updatehospital/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedHospital),

@@ -39,7 +39,7 @@ const EditTourismSpot = () => {
   ];
 
   useEffect(() => {
-    fetch(`http://localhost:5000/tourism/details/${id}`)
+    fetch(`https://district-connect-backend.onrender.com/tourism/details/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setName(data.name);
@@ -55,7 +55,7 @@ const EditTourismSpot = () => {
     const updatedTourismSpot = { name, description, district, locationUrl, embedUrl };
 
     try {
-      const response = await fetch(`http://localhost:5000/tourism/updatetourism/${id}`, {
+      const response = await fetch(`https://district-connect-backend.onrender.com/tourism/updatetourism/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedTourismSpot),

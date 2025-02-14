@@ -9,7 +9,7 @@ const JobVacancy = () => {
   const [jobs, setJobs] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/job/displayjobs")
+    fetch("https://district-connect-backend.onrender.com/job/displayjobs")
       .then((res) => res.json())
       .then((data) => {
         const filteredJobs = district

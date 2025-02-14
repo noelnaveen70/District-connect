@@ -8,7 +8,7 @@ const School = () => {
   const [schools, setSchools] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/school/displayschools")
+    fetch("https://district-connect-backend.onrender.com/school/displayschools")
       .then((res) => res.json())
       .then((data) => {
         const filteredSchools = district

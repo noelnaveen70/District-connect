@@ -28,7 +28,7 @@ const EditSchool = () => {
   ];
 
   useEffect(() => {
-    fetch(`http://localhost:5000/school/details/${id}`)
+    fetch(`https://district-connect-backend.onrender.com/school/details/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setName(data.name);
@@ -44,7 +44,7 @@ const EditSchool = () => {
     const updatedSchool = { name, description, district, locationUrl, embedUrl };
 
     try {
-      const response = await fetch(`http://localhost:5000/school/updateschool/${id}`, {
+      const response = await fetch(`https://district-connect-backend.onrender.com/school/updateschool/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedSchool),

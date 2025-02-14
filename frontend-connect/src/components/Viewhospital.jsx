@@ -7,7 +7,7 @@ const ViewHospitalPage = () => {
   const [hospitals, setHospitals] = useState([]);
 
   useEffect(() => {
-  fetch("http://localhost:5000/hospital/displayhospitals")
+  fetch("https://district-connect-backend.onrender.com/hospital/displayhospitals")
 
       .then((res) => res.json())
       .then((data) => setHospitals(data))
@@ -18,7 +18,7 @@ const ViewHospitalPage = () => {
     if (!window.confirm("Are you sure you want to delete this hospital entry?")) return;
 
     try {
-      const response = await fetch(`http://localhost:5000/hospital/deletehospital/${id}`, {
+      const response = await fetch(`https://district-connect-backend.onrender.com/hospital/deletehospital/${id}`, {
         method: "DELETE",
       });
 

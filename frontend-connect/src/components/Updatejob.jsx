@@ -38,7 +38,7 @@ const EditJobVacancy = () => {
   ];
 
   useEffect(() => {
-    fetch(`http://localhost:5000/job/details/${id}`)
+    fetch(`https://district-connect-backend.onrender.com/job/details/${id}`)
       .then((res) => res.json())
       .then((data) => {
         
@@ -54,7 +54,7 @@ const EditJobVacancy = () => {
     const updatedJob = { companyName, jobRole, lastDate, districtName: district };
 
     try {
-      const response = await fetch(`http://localhost:5000/job/updatejob/${id}`, {
+      const response = await fetch(`https://district-connect-backend.onrender.com/job/updatejob/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedJob),
