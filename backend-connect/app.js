@@ -1,4 +1,4 @@
-require("dotenv").config();
+require("dotenv").config(); // Load environment variables at the top
 const express = require("express");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
@@ -10,18 +10,18 @@ const cloudinary = require("cloudinary").v2;
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-//  Ensure MONGO_URI is set
+//  Ensure all required environment variables are set
 if (!process.env.MONGO_URI) {
   console.error(" MONGO_URI is not set in .env file");
   process.exit(1);
 }
 
-//  Connect to MongoDB
+// ✅ Connect to MongoDB
 mongoose
-   .connect(process.env.MONGO_URI) // ✅ No need for deprecated options
-  .then(() => console.log("MongoDB Connected"))
+  .connect(process.env.MONGO_URI)
+  .then(() => console.log(" MongoDB Connected"))
   .catch((err) => {
-    console.error("MongoDB Connection Error:", err);
+    console.error(" MongoDB Connection Error:", err);
     process.exit(1); // Stop the app if MongoDB connection fails
   });
 
@@ -32,7 +32,7 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-//  Setup CORS
+//  Setup CORS (Allow Frontend URL, NOT Backend)
 app.use(
   cors({
     credentials: true,
@@ -44,7 +44,7 @@ app.use(
 app.use(express.json());
 app.use("/uploads", express.static(path.join(__dirname, "uploads"))); // Serve uploaded files
 
-//  Session Configuration
+//  Session Configuration (Handles production & dev environments)
 app.use(
   session({
     secret: process.env.SESSION_SECRET || "your_secret_key",
@@ -57,7 +57,8 @@ app.use(
     cookie: {
       maxAge: 1000 * 60 * 60, // 1 hour
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: process.env.NODE_ENV === "production", // Secure in production
+      sameSite: "lax",
     },
   })
 );
@@ -70,13 +71,18 @@ const tourismRoutes = require("./routes/tourismRoutes");
 const hospitalRoutes = require("./routes/hospitalRoutes");
 const schoolRoutes = require("./routes/schoolRoutes");
 
-//  Use Routes (Fixed API Paths)
+//  Use Routes (Ensure API Paths Are Correct)
 app.use("/log", loginRoutes);
 app.use("/job", jobRoutes);
 app.use("/jobapply", jobApplyRoutes);
 app.use("/tourism", tourismRoutes);
 app.use("/hospital", hospitalRoutes);
 app.use("/school", schoolRoutes);
+
+//  Default Route to Check Server Status
+app.get("/", (req, res) => {
+  res.send(" District Connect Backend is Running!");
+});
 
 //  Start Server
 app.listen(PORT, () => console.log(` Server running on port ${PORT}`));
