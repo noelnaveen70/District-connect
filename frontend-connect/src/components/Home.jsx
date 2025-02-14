@@ -64,15 +64,26 @@ const Home = () => {
       <header>
         <h2 className="logo">KERALAM</h2>
         <nav className="navigation">
-          <a href="#" className="active">Home</a>
-          <a href="/Districts">District</a>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/Districts">Districts</Link></li>
+
+
+
+
+
+         
+
+
+
+
+
 
           {userRole == "admin" && (
             <a href="/Adminpanel">Add</a>
           )}
 
           {!isLoggedIn ? (
-            <Link to="/login">Login</Link> 
+            <li><Link to="/login">Login</Link></li>
           ) : (
             <Link onClick={handleLogout}>Logout</Link>
           )}
