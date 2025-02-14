@@ -1,0 +1,245 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: #f9f9f9;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Header Section */
+header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 30px 5%;
+  display: flex;
+  flex-direction: column; /* Centering navbar */
+  align-items: center;
+  z-index: 100;
+}
+
+.logo {
+  font-size: 2.5em; /* Slightly bigger for better emphasis */
+  color: #359381;
+  font-weight: 700; /* Using a stylish bold weight */
+  font-family: 'Playfair Display', serif; /* Elegant and stylish font */
+  letter-spacing: 1px; /* Slight spacing for a premium feel */
+  text-transform: uppercase; /* Optional: Makes it look more striking */
+}
+
+/* Navigation Bar */
+.navigation {
+  display: flex;
+  gap: 20px;
+  justify-content: center; /* Centering the navbar items */
+  align-items: center;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.navigation a {
+  text-decoration: none;
+  color: #359381;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-weight: 500; /* Very thin font weight */
+  transition: background 0.3s ease;
+}
+
+.navigation a:hover,
+.navigation a.active {
+  background: #359381;
+  color: #fff;
+  padding: 6px 14px;
+}
+
+/* Parallax Section */
+.parallax {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.parallax img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.parallax-text {
+   font-family: 'Playfair Display', serif; 
+  position: absolute;
+  font-size: clamp(3em, 5vw, 6em);
+  color: #fff;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  z-index: 10;
+  width: 80%;
+}
+
+/* About Section */
+.sec {
+  background: #003329;
+  padding: 8vw;
+  text-align: center;
+}
+
+.sec h2 {
+  font-size: clamp(2.5em, 4vw, 4em);
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.sec p {
+  font-size: clamp(1em, 1.5vw, 1.2em);
+  color: #fff;
+  font-weight: 300;
+  max-width: 70%;
+  margin: auto;
+  line-height: 1.8;
+}
+
+/* Footer */
+.footer {
+  background: #003329;
+  color: white;
+  padding: 50px 5%;
+  text-align: center;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 1400px;
+  margin: auto;
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 250px;
+  padding: 20px;
+}
+
+.footer-section h2 {
+  font-size: 1.5em;
+  margin-bottom: 15px;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin: 10px 0;
+}
+
+.footer-section ul li a {
+  text-decoration: none;
+  color: #fff;
+  transition: color 0.3s;
+}
+
+.footer-section ul li a:hover {
+  color: #359381;
+}
+
+.footer-bottom {
+  margin-top: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding-top: 15px;
+  font-size: 0.9em;
+}
+
+/* ✅ Responsive Adjustments */
+@media (max-width: 1400px) {
+  .navigation {
+    gap: 15px;
+  }
+
+  .parallax-text {
+    font-size: 5vw;
+  }
+
+  .sec {
+    padding: 6vw;
+  }
+}
+
+@media (max-width: 1024px) {
+  header {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 50px;
+  }
+
+  .navigation {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .sec {
+    padding: 80px 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  header {
+    padding: 15px 30px;
+  }
+
+  .navigation a {
+    padding: 6px 12px;
+  }
+
+  .parallax {
+    height: 70vh;
+  }
+
+  .sec {
+    padding: 50px 20px;
+  }
+
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    padding: 10px 20px;
+  }
+
+  .parallax {
+    height: 60vh;
+  }
+
+  .sec {
+    padding: 30px;
+  }
+}
+
+@media (max-width: 375px) {
+  .parallax {
+    height: 50vh;
+  }
+
+  .sec {
+    padding: 20px;
+  }
+}
