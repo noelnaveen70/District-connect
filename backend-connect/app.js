@@ -80,7 +80,7 @@ app.use("/hospital", hospitalRoutes);
 app.use("/school", schoolRoutes);
 
 //  Default Route to Check Server Status
-app.get("/", (req, res) => {
+app.get("/", (req, res) => {  
   res.send(" District Connect Backend is Running!");
 });
 
