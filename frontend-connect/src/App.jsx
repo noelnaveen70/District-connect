@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import Home from "./components/Home";
@@ -29,6 +29,7 @@ import { AuthProvider } from "./components/AuthContext";
 
 const PrivateRoute = ({ children, roles }) => {
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -38,13 +39,16 @@ const PrivateRoute = ({ children, roles }) => {
           setUser(response.data.user);
         } else {
           setUser(null);
+          navigate("/login");
         }
       })
-      .catch(() => setUser(null));
-  }, []);
+      .catch(() => {
+        setUser(null);
+        navigate("/login");
+      });
+  }, [navigate]);
 
-  if (user === null) return <Navigate to="/login" />;
-  return roles.includes(user.role) ? children : <Navigate to="/home" />;
+  return user && roles.includes(user.role) ? children : <Navigate to="/home" />;
 };
 
 function App() {
@@ -56,24 +60,24 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/districts" element={<Districts />} />
         <Route path="/adminpanel" element={<PrivateRoute roles={['admin']}><Adminpanel /></PrivateRoute>} />
-        <Route path="/create-job" element={<Createjob />} />
-        <Route path="/view-job" element={<Viewjob />} />
-        <Route path="/create-tourism" element={<Createtourism />} />
-        <Route path="/view-tourism" element={<Viewtourism />} />
-        <Route path="/edit-job/:id" element={<Updatejob />} />
-        <Route path="/edit-tourism/:id" element={<Updatetourism />} />
-        <Route path="/create-hospital" element={<Createhospital />} />
-        <Route path="/view-hospital" element={<Viewhospital />} />
-        <Route path="/edit-hospital/:id" element={<Updatehospital />} />
-        <Route path="/edit-school/:id" element={<Updateschool />} />
-        <Route path="/create-school" element={<Createschool />} />
-        <Route path="/view-school" element={<Viewschool />} />
+        <Route path="/createjob" element={<PrivateRoute roles={['admin']}><Createjob /></PrivateRoute>} />
+        <Route path="/viewjob" element={<Viewjob />} />
+        <Route path="/createtourism" element={<PrivateRoute roles={['admin']}><Createtourism /></PrivateRoute>} />
+        <Route path="/viewtourism" element={<Viewtourism />} />
+        <Route path="/edit-job/:id" element={<PrivateRoute roles={['admin']}><Updatejob /></PrivateRoute>} />
+        <Route path="/edit-tourism/:id" element={<PrivateRoute roles={['admin']}><Updatetourism /></PrivateRoute>} />
+        <Route path="/createhospital" element={<PrivateRoute roles={['admin']}><Createhospital /></PrivateRoute>} />
+        <Route path="/viewhospital" element={<Viewhospital />} />
+        <Route path="/edit-hospital/:id" element={<PrivateRoute roles={['admin']}><Updatehospital /></PrivateRoute>} />
+        <Route path="/edit-school/:id" element={<PrivateRoute roles={['admin']}><Updateschool /></PrivateRoute>} />
+        <Route path="/createschool" element={<PrivateRoute roles={['admin']}><Createschool /></PrivateRoute>} />
+        <Route path="/viewschool" element={<Viewschool />} />
         <Route path="/job-vacancy" element={<JobVacancy />} />
         <Route path="/tourism" element={<Tourism />} />
         <Route path="/hospital" element={<Hospital />} />
         <Route path="/school" element={<School />} />
         <Route path="/jobapply" element={<Jobapply />} />
-        <Route path="/job-applications" element={<JobApplications />} />
+        <Route path="/jobapplications" element={<PrivateRoute roles={['admin']}><JobApplications /></PrivateRoute>} />
       </Routes>
     </AuthProvider>
   );
