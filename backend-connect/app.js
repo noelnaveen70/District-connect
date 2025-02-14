@@ -39,7 +39,7 @@ cloudinary.config({
 app.use(
   cors({
     credentials: true,
-    origin: ["https://district-connect-backend.onrender.com", "http://localhost:5173"],
+    origin: ["https://district-connect-backend.onrender.com", "https://district-connect-backend.onrender.com"],
   })
 );
 
